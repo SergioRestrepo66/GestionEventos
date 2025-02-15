@@ -20,10 +20,10 @@ Base de Datos: MongoDB con Mongoose.
 Instalación y Configuración
 
 1. Clonar el Repositorio
-
+´´´´´´
 git clone https://github.com/tuusuario/GestionEventos.git
 cd GestionEventos
-
+´´´´´´
 2. Configurar el Backend
    
 cd backend
