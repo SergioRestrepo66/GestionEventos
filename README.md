@@ -57,5 +57,5 @@ Ejecutar la aplicación React
 ```
 npm start
 ```
-Espero que te guste mucho al funcionaidad de la aplicación y que disfrutes mucho usandola. ¡Hasta luego!
+Espero que te guste mucho la funcionaidad de la aplicación y que disfrutes mucho usandola. ¡Hasta luego!
 
