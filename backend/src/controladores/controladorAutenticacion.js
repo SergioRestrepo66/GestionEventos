@@ -31,18 +31,29 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    // Verificar si el usuario existe
     const usuario = await Usuario.findOne({ email });
-    if (!usuario) return res.status(400).json({ message: "correo o contraseña incorrectos" });
+    if (!usuario) {
+      return res.status(400).json({ message: "Credenciales incorrectas" });
+    }
 
+    // Comparar la contraseña
     const isMatch = await bcrypt.compare(password, usuario.password);
-    if (!isMatch) return res.status(400).json({ message: "correo o contraseña incorrectos" });
+    if (!isMatch) {
+      return res.status(400).json({ message: "Credenciales incorrectas" });
+    }
 
+    // Generar el token de autenticación
     const token = jwt.sign(
-      { id: usuario._id }, JWT_SECRET, { expiresIn: '1h' }
+      { id: usuario._id },
+      process.env.JWT_SECRET, // Usa la variable de entorno para mayor seguridad
+      { expiresIn: '1h' }
     );
 
-    res.status(200).json({mensaje: 'Inicio de sesión exitoso',  token });
+    // Respuesta exitosa con el token
+    res.status(200).json({ mensaje: 'Inicio de sesión exitoso', token });
   } catch (err) {
-    res.status(500).json({ mensaje: "Error en el servidor", error:err.message });
+    console.error("Error en el login:", err);
+    res.status(500).json({ mensaje: "Error en el servidor", error: err.message });
   }
 };
